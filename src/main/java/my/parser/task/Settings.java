@@ -15,13 +15,11 @@ import my.parser.task.util.PathValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * @author victor
  *
  */
-@Component
 public class Settings {
 	private static final Logger LOGGER = Logger.getLogger(Settings.class.getName());
 	private static final String DATA_PATH = "../xml-files/";
@@ -38,9 +36,13 @@ public class Settings {
 	
 	private Properties props = new Properties();
 	
+	public Settings() {
+		defaults();
+	}
+	
 	@Autowired(required=true)
 	public Settings(@Value("#{args}") String[] args) {
-		defaults();
+		this();
 		load();
 		
 		if (args.length != 0)

@@ -59,12 +59,12 @@ public class DataProcessor {
 
 	public void process(final String path) {
 		results.clear();
+		final Settings settings = App.context.getBean(Settings.class);
 		
 		File file = new File(path);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
-				Settings settings = App.context.getBean(Settings.class);
 				return name.matches(settings.getMask());
 			}
 		};
@@ -87,7 +87,7 @@ public class DataProcessor {
 			}
 			final String filePath = sb + xmlFile;
 			
-			futures.add(executor.submit(new XmlProcessor(filePath)));
+			futures.add(executor.submit(new XmlProcessor(filePath, settings)));
 		}
 		executor.shutdown();
 		

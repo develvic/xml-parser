@@ -4,24 +4,47 @@
 package my.parser.task;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
+import my.parser.task.util.ValueEntry;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author victor
  *
  */
 public class ValueContainer {
-	private ArrayList<Entry<String, Double>> values = null;
+	private ArrayList<ValueEntry> values = null;
 	
 	public ValueContainer() {
-		values = new ArrayList<Entry<String, Double>>();
+		values = new ArrayList<ValueEntry>();
 	}
 
-	public ArrayList<Entry<String, Double>> getValues() {
+	@Autowired
+	public ArrayList<ValueEntry> getValues() {
 		return values;
 	}
 
-	public void setValues(ArrayList<Entry<String, Double>> values) {
+	@Autowired
+	public void setValues(ArrayList<ValueEntry> values) {
 		this.values = values;
+	}
+	
+	public boolean containsAll(ArrayList<ValueEntry> extValue) {
+		boolean found = true;
+		for (ValueEntry extEntry : extValue) {
+			if (found) {
+				found = false;
+				for (ValueEntry entry : values) {
+					if (entry.equals(extEntry)) {
+						found = true;
+						break;
+					}
+				}
+			} else {
+				return false;
+			}
+		}
+		
+		return found;
 	}
 }
