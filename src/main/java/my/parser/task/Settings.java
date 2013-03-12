@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
  *
  */
 public class Settings {
-	private static final Logger LOGGER = Logger.getLogger(Settings.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Settings.class);
 	private static final String DATA_PATH = "../xml-files/";
 	private static final String PROP_FILE = "xml-parser.properties";
 	

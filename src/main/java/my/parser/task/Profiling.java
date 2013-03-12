@@ -20,17 +20,9 @@ import org.springframework.context.annotation.Scope;
 @Aspect
 @Scope("prototype")
 public class Profiling {
-	private static final Logger LOGGER = Logger.getLogger(Profiling.class.getName());	
+	private static final Logger LOGGER = Logger.getLogger(Profiling.class);	
 	private long start = 0;
 	private static ArrayList<Long> arr = new ArrayList<Long>();
-	
-	/*@Pointcut("execution(* my.parser.task.*.*(..))")
-	private void selectAll() {}
-	
-	@Before("selectAll()")
-	public void beforeAdvice() {
-		// TODO
-	}*/
 	
 	@Pointcut("execution(* my.parser.task.XmlProcessor.parseXmlFile(..))")
 	private void parseXmlFile() {}

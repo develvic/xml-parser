@@ -14,7 +14,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 class ResultContainer implements InitializingBean, DisposableBean {
-	private static final Logger LOGGER = Logger.getLogger(ResultContainer.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ResultContainer.class);
 
 	private ArrayList<Meter> results = null;
 	
