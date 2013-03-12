@@ -34,4 +34,15 @@ public class ValueEntry implements Entry<String, Double> {
 		return this.value;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		
+		ValueEntry ve = (ValueEntry)obj;
+		if (this.key.equals(ve.key) && this.value.equals(ve.value))
+			return true;
+		
+		return false;
+	}
 }

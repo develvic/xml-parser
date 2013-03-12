@@ -4,8 +4,8 @@
 package my.parser.task;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  */
 class ResultContainer implements InitializingBean, DisposableBean {
-	private static final Logger LOGGER = Logger.getLogger(ResultContainer.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ResultContainer.class);
 
 	private ArrayList<Meter> results = null;
 	

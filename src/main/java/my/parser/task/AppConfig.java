@@ -15,6 +15,11 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class AppConfig {
 	@Bean
+	public Settings settings() {
+		return new Settings();
+	}
+	
+	@Bean
 	@Scope("prototype")
 	public ResultContainer resultContainer() {
 		return new ResultContainer();

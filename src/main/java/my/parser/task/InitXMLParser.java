@@ -3,8 +3,7 @@
  */
 package my.parser.task;
 
-import java.util.logging.Logger;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  *
  */
 public class InitXMLParser implements BeanPostProcessor {
-	private static final Logger LOGGER = Logger.getLogger(InitXMLParser.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(InitXMLParser.class);
 	/* (non-Javadoc)
 	 * @see org.springframework.beans.factory.config.BeanPostProcessor#postProcessBeforeInitialization(java.lang.Object, java.lang.String)
 	 */

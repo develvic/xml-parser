@@ -8,22 +8,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import my.parser.task.util.PathValidator;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 /**
  * @author victor
  *
  */
-@Component
 public class Settings {
-	private static final Logger LOGGER = Logger.getLogger(Settings.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Settings.class);
 	private static final String DATA_PATH = "../xml-files/";
 	private static final String PROP_FILE = "xml-parser.properties";
 	
@@ -38,9 +35,13 @@ public class Settings {
 	
 	private Properties props = new Properties();
 	
+	public Settings() {
+		defaults();
+	}
+	
 	@Autowired(required=true)
 	public Settings(@Value("#{args}") String[] args) {
-		defaults();
+		this();
 		load();
 		
 		if (args.length != 0)
@@ -61,7 +62,7 @@ public class Settings {
 			props.load(fis);
 			fis.close();
 		} catch (FileNotFoundException e) {
-			LOGGER.log(Level.WARNING, "File '" + PROP_FILE + " not found."
+			LOGGER.warn("File '" + PROP_FILE + " not found."
 					+ " Default settings will be used.");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -106,7 +107,7 @@ public class Settings {
 		String path = (args.length != 0 && !args[0].isEmpty()) ? args[0] : DATA_PATH;
 		
 		if (!(PathValidator.isValid(path))) {
-			LOGGER.log(Level.SEVERE, "Path to XML data files invalid");
+			LOGGER.error("Path to XML data files invalid");
 		} else {
 			props.setProperty(PATH_KEY, path);
 		}

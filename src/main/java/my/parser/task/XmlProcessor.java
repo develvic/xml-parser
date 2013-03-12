@@ -16,6 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import my.parser.task.util.ValueEntry;
 
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -26,6 +27,7 @@ import org.xml.sax.SAXException;
  * @author victor
  *
  */
+@Component
 public class XmlProcessor implements Callable<Meter> {
 	private final static String TAG_ENTRY = "entry";
 	private final static String ATTR_INFO = "info";
@@ -36,6 +38,8 @@ public class XmlProcessor implements Callable<Meter> {
 	private String file = null;
 	private Document dom = null;
 	private Meter meter = null;
+	
+	private DateFormat dateFormat = null;
 	
 	public String getFile() {
 		return file;
@@ -48,8 +52,9 @@ public class XmlProcessor implements Callable<Meter> {
 	public XmlProcessor() {
 	}
 	
-	public XmlProcessor(final String file) {
+	public XmlProcessor(final String file, final Settings settings) {
 		this.file = file;
+		dateFormat = new SimpleDateFormat(settings.getDataFormat());
 	}
 	
 	public Meter getMeter() {
@@ -90,10 +95,8 @@ public class XmlProcessor implements Callable<Meter> {
 	}
 	
 	private void createMeter(final Element element) {
-		Settings settings = App.context.getBean(Settings.class);
-		final DateFormat dateFormat = new SimpleDateFormat(settings.getDataFormat());
 		final String info = element.getAttribute(ATTR_INFO);
-		ValueContainer values = (ValueContainer) App.context.getBean("valueContainer");
+		ValueContainer values = new ValueContainer();//App.context.getBean(ValueContainer.class);
 		String time = element.getAttribute(ATTR_TIME);
 		Date date = null;
 		
@@ -122,7 +125,8 @@ public class XmlProcessor implements Callable<Meter> {
 			}
 		}
 		
-		meter = (Meter) App.context.getBean("meter");
+		//meter = (Meter) App.context.getBean("meter");
+		meter = new Meter();
 		
 		if (!values.getValues().isEmpty())
 			meter.setValues(values);

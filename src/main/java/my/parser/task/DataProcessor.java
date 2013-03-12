@@ -11,9 +11,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -21,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  */
 public class DataProcessor {
-	private final static Logger LOGGER = Logger.getLogger(DataProcessor.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DataProcessor.class);
 	
 	private ResultContainer rc = null;
 	private ArrayList<Meter> results = null;
@@ -59,21 +57,21 @@ public class DataProcessor {
 
 	public void process(final String path) {
 		results.clear();
+		final Settings settings = App.context.getBean(Settings.class);
 		
 		File file = new File(path);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
-				Settings settings = App.context.getBean(Settings.class);
 				return name.matches(settings.getMask());
 			}
 		};
 		String[] xmlFiles = file.list(filter);
 		
 		if (xmlFiles.length == 0) {
-			LOGGER.log(Level.SEVERE, "No appropriate XML files in '" + path + "'");
+			LOGGER.error("No appropriate XML files in '" + path + "'");
 		} else {
-			LOGGER.log(Level.INFO, xmlFiles.length + " file(s) found in '" + path + "'");
+			LOGGER.info(xmlFiles.length + " file(s) found in '" + path + "'");
 		}
 		
 		// start timer
@@ -87,7 +85,7 @@ public class DataProcessor {
 			}
 			final String filePath = sb + xmlFile;
 			
-			futures.add(executor.submit(new XmlProcessor(filePath)));
+			futures.add(executor.submit(new XmlProcessor(filePath, settings)));
 		}
 		executor.shutdown();
 		

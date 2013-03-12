@@ -1,7 +1,8 @@
 package my.parser.task;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class App {
 	@SuppressWarnings("unused")
-	private final static Logger LOGGER = Logger.getLogger(App.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(App.class);
 	public static AnnotationConfigApplicationContext context =
 			new AnnotationConfigApplicationContext();
 		
