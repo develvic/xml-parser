@@ -4,8 +4,8 @@
 package my.parser.task;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

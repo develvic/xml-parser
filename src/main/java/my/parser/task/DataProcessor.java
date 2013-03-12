@@ -11,9 +11,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -21,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  */
 public class DataProcessor {
-	private final static Logger LOGGER = Logger.getLogger(DataProcessor.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(DataProcessor.class);
 	
 	private ResultContainer rc = null;
 	private ArrayList<Meter> results = null;
@@ -71,9 +69,9 @@ public class DataProcessor {
 		String[] xmlFiles = file.list(filter);
 		
 		if (xmlFiles.length == 0) {
-			LOGGER.log(Level.SEVERE, "No appropriate XML files in '" + path + "'");
+			LOGGER.error("No appropriate XML files in '" + path + "'");
 		} else {
-			LOGGER.log(Level.INFO, xmlFiles.length + " file(s) found in '" + path + "'");
+			LOGGER.info(xmlFiles.length + " file(s) found in '" + path + "'");
 		}
 		
 		// start timer

@@ -4,8 +4,8 @@
 package my.parser.task;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
