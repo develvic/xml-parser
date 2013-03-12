@@ -14,7 +14,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *
  */
 public class App {
-	@SuppressWarnings("unused")
 	private final static Logger LOGGER = Logger.getLogger(App.class);
 	public static AnnotationConfigApplicationContext context =
 			new AnnotationConfigApplicationContext();
@@ -34,7 +33,11 @@ public class App {
 		
 		Settings config = context.getBean(Settings.class);
 		DataProcessor dp = context.getBean(DataProcessor.class);
-		dp.process(config.getPath());
+		try {
+			dp.process(config.getPath());
+		} catch (Exception e) {
+			LOGGER.fatal(e.getMessage());
+		}
 		dp.print();
 		
 		context.close();

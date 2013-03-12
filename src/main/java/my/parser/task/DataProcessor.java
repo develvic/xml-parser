@@ -11,6 +11,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import my.parser.task.util.PathValidator;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,7 +58,11 @@ public class DataProcessor {
 		}
 	}
 
-	public void process(final String path) {
+	public void process(final String path) throws Exception {
+		if (!PathValidator.isValid(path)) {
+			throw new Exception("Given path '" + path + "' is not valid");
+		}
+		
 		results.clear();
 		final Settings settings = App.context.getBean(Settings.class);
 		
@@ -68,10 +75,10 @@ public class DataProcessor {
 		};
 		String[] xmlFiles = file.list(filter);
 		
-		if (xmlFiles.length == 0) {
-			LOGGER.error("No appropriate XML files in '" + path + "'");
-		} else {
+		if (xmlFiles != null && xmlFiles.length != 0) {
 			LOGGER.info(xmlFiles.length + " file(s) found in '" + path + "'");
+		} else {
+			throw new Exception("No appropriate XML files in '" + path + "'");
 		}
 		
 		// start timer
