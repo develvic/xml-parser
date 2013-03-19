@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import my.parser.task.measurement.Measurement;
 import my.parser.task.util.PathValidator;
 
 import org.apache.log4j.Logger;
@@ -25,7 +26,7 @@ public class DataProcessor {
 	private final static Logger LOGGER = Logger.getLogger(DataProcessor.class);
 	
 	private ResultContainer rc = null;
-	private ArrayList<Meter> results = null;
+	private ArrayList<Measurement> results = null;
 	private Collection<Future<?>> futures = null;
 	
 	@Autowired
@@ -44,13 +45,13 @@ public class DataProcessor {
 	
 	private void prepareResults() {
 		if (results == null)
-			results = new ArrayList<Meter>(futures.size());
+			results = new ArrayList<Measurement>(futures.size());
 		else
 			results.ensureCapacity(futures.size());
 		
 		for (Future<?> future : futures) {
 		    try {
-				results.add((Meter) future.get());
+				results.add((Measurement) future.get());
 			} catch (InterruptedException | ExecutionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

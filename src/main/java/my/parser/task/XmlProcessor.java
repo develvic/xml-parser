@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import my.parser.task.measurement.Measurement;
 import my.parser.task.util.ValueEntry;
 
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ import org.xml.sax.SAXException;
  *
  */
 @Component
-public class XmlProcessor implements Callable<Meter> {
+public class XmlProcessor implements Callable<Measurement> {
 	private final static String TAG_ENTRY = "entry";
 	private final static String ATTR_INFO = "info";
 	private final static String ATTR_TIME = "timestamp";
@@ -37,7 +38,7 @@ public class XmlProcessor implements Callable<Meter> {
 	
 	private String file = null;
 	private Document dom = null;
-	private Meter meter = null;
+	private Measurement meter = null;
 	
 	private DateFormat dateFormat = null;
 	
@@ -57,7 +58,7 @@ public class XmlProcessor implements Callable<Meter> {
 		dateFormat = new SimpleDateFormat(settings.getDataFormat());
 	}
 	
-	public Meter getMeter() {
+	public Measurement getMeter() {
 		return meter;
 	}
 	
@@ -126,7 +127,7 @@ public class XmlProcessor implements Callable<Meter> {
 		}
 		
 		//meter = (Meter) App.context.getBean("meter");
-		meter = new Meter();
+		meter = new Measurement();
 		
 		if (!values.getValues().isEmpty())
 			meter.setValues(values);
@@ -149,7 +150,7 @@ public class XmlProcessor implements Callable<Meter> {
 	}
 
 	@Override
-	public Meter call() throws Exception {
+	public Measurement call() throws Exception {
 		parseXmlFile();
 		parseDocument();
 		

@@ -3,6 +3,8 @@ package my.parser.task;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+
+import my.parser.task.measurement.Measurement;
 import my.parser.task.util.ValueEntry;
 
 import org.junit.After;
@@ -63,7 +65,7 @@ public class AppTest {
 			e.printStackTrace();
 		}
 		
-		Meter m = processor.getMeter();
+		Measurement m = processor.getMeter();
 		assertNotNull(m);
 		
 		assertTrue(m.getTimestamp() != 0);

@@ -1,0 +1,28 @@
+<data info="">
+ <entry timestamp="2003-04-19T11:15">
+  <value name="AC1KWH">289753.21875
+  </value>
+  <value name="AC3KW">10.40625
+  </value>
+  <value name="AC2KW">5.984375
+  </value>
+  <value name="HCKWH">203133.71875
+  </value>
+  <value name="AC3KWH">308624.125
+  </value>
+  <value name="AC2KWH">163964.0625
+  </value>
+  <value name="MainKW">172.8
+  </value>
+  <value name="AC4KW">9.1875
+  </value>
+  <value name="AC4KWH">205101.0
+  </value>
+  <value name="AC1KW">13.875
+  </value>
+  <value name="MainScaledKWH">4773232.64
+  </value>
+  <value name="HCKW">18.484375
+  </value>
+ </entry>
+</data>

@@ -3,6 +3,8 @@
  */
 package my.parser.task;
 
+import my.parser.task.measurement.Measurement;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -38,8 +40,8 @@ public class AppConfig {
 	
 	@Bean
 	@Scope("prototype")
-	public Meter meter() {
-		return new Meter();
+	public Measurement meter() {
+		return new Measurement();
 	}
 	
 	@Bean

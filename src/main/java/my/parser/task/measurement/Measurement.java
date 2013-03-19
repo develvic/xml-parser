@@ -1,10 +1,12 @@
 /**
  * 
  */
-package my.parser.task;
+package my.parser.task.measurement;
 
 import java.util.Date;
 import java.util.Map.Entry;
+
+import my.parser.task.ValueContainer;
 
 import org.springframework.stereotype.Component;
 
@@ -13,11 +15,20 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class Meter {
+public class Measurement {
 	private ValueContainer values = null;
+	private int id = 0;
 	private Long timestamp = null;
 	private String info = null;
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getInfo() {
 		return info;
 	}
